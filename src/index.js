@@ -1,4 +1,4 @@
-class Ingest {
+class SimpleIngest {
     async get(url, options = {}) {
       return this._request(url, { ...options, method: 'GET' });
     }
@@ -56,4 +56,4 @@ class Ingest {
     }
   }
   
-  export default Ingest;
+  export default SimpleIngest;

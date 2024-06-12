@@ -1,5 +1,5 @@
 {
-  "name": "simple-ingest",
+  "name": "si",
   "version": "1.0.3",
   "main": "src/index.js",
   "type": "module",
