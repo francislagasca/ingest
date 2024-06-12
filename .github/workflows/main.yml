@@ -16,6 +16,8 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm test
+      - name: Wait for rate limiting
+        run: sleep 60  # Delay for 60 seconds
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
