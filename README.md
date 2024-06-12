@@ -2,12 +2,12 @@
 
 ## Installation
 ```bash
-npm install ingest
+npm install simple-ingest
 ```
 
 ## Usage
 ```javascript
-import Ingest from 'ingest';
+import Ingest from 'simple-ingest';
 ```
 
 ### GET Request

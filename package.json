@@ -1,5 +1,5 @@
 {
-  "name": "ingest",
+  "name": "simple-ingest",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
