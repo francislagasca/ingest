@@ -56,4 +56,4 @@ class Ingest {
     }
   }
   
-  export default new Ingest();
+  export default Ingest;

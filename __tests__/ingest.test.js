@@ -8,12 +8,15 @@ global.fetch = jest.fn(() =>
 );
 
 describe('Ingest', () => {
+  let ingest;
+
   beforeEach(() => {
     fetch.mockClear();
+    ingest = new Ingest();
   });
 
   it('should perform a GET request', async () => {
-    const data = await Ingest.get('https://api.example.com/data');
+    const data = await ingest.get('https://api.example.com/data');
     expect(data).toEqual({ data: 'test data' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', {
@@ -26,7 +29,7 @@ describe('Ingest', () => {
 
   it('should perform a POST request', async () => {
     const payload = { key: 'value' };
-    const data = await Ingest.post('https://api.example.com/data', payload);
+    const data = await ingest.post('https://api.example.com/data', payload);
     expect(data).toEqual({ data: 'test data' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', {
@@ -40,7 +43,7 @@ describe('Ingest', () => {
 
   it('should perform a PUT request', async () => {
     const payload = { key: 'value' };
-    const data = await Ingest.put('https://api.example.com/data', payload);
+    const data = await ingest.put('https://api.example.com/data', payload);
     expect(data).toEqual({ data: 'test data' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', {
@@ -53,7 +56,7 @@ describe('Ingest', () => {
   });
 
   it('should perform a DELETE request', async () => {
-    const data = await Ingest.delete('https://api.example.com/data');
+    const data = await ingest.delete('https://api.example.com/data');
     expect(data).toEqual({ data: 'test data' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', {
@@ -74,7 +77,7 @@ describe('Ingest', () => {
       })
     );
 
-    const data = await Ingest.get('https://api.example.com/data', {
+    const data = await ingest.get('https://api.example.com/data', {
       retries: 1,
       retryDelay: 100,
     });
@@ -89,7 +92,7 @@ describe('Ingest', () => {
     );
 
     await expect(
-      Ingest.get('https://api.example.com/data', {
+      ingest.get('https://api.example.com/data', {
         retries: 1,
         retryDelay: 100,
       })
@@ -115,7 +118,7 @@ describe('Ingest', () => {
   it('should handle network errors', async () => {
     fetch.mockImplementationOnce(() => Promise.reject(new Error('Network error')));
 
-    await expect(Ingest.get('https://api.example.com/data')).rejects.toThrow('Network error');
+    await expect(ingest.get('https://api.example.com/data')).rejects.toThrow('Network error');
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 
@@ -128,7 +131,7 @@ describe('Ingest', () => {
       })
     );
 
-    await expect(Ingest.get('https://api.example.com/data')).rejects.toThrow('HTTP error! Status: 404');
+    await expect(ingest.get('https://api.example.com/data')).rejects.toThrow('HTTP error! Status: 404');
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 });
