@@ -20,7 +20,7 @@ jobs:
         run: |
           max_attempts=5
           attempt=1
-          delay=60 # Increased initial delay to 60 seconds
+          delay=60
           while [ $attempt -le $max_attempts ]; do
             if npm publish --access public; then
               echo "Publish succeeded"
@@ -33,7 +33,7 @@ jobs:
                 echo "Publish failed, retrying in $delay seconds..."
                 sleep $delay
                 attempt=$(( $attempt + 1 ))
-                delay=$(( $delay * 2 )) # Exponential backoff
+                delay=$(( $delay * 2 ))
               fi
             fi
           done
