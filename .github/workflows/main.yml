@@ -20,7 +20,7 @@ jobs:
         run: |
           max_attempts=5
           attempt=1
-          delay=10
+          delay=60 # Increased initial delay to 60 seconds
           while [ $attempt -le $max_attempts ]; do
             if npm publish --access public; then
               echo "Publish succeeded"
@@ -33,9 +33,11 @@ jobs:
                 echo "Publish failed, retrying in $delay seconds..."
                 sleep $delay
                 attempt=$(( $attempt + 1 ))
-                delay=$(( $delay * 2 ))
+                delay=$(( $delay * 2 )) # Exponential backoff
               fi
             fi
           done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Check npm logs
+        run: cat /home/runner/.npm/_logs/$(date +"%Y-%m-%d")* | tail -n 100
