@@ -2,12 +2,12 @@
 
 ## Installation
 ```bash
-npm install si
+npm install simple-ingest
 ```
 
 ## Usage
 ```javascript
-import SimpleIngest from 'si';
+import SimpleIngest from 'simple-ingest';
 
 const si = new SimpleIngest();
 ```
