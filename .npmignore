@@ -1,0 +1,12 @@
+# Ignore GitHub workflows
+.github/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore test files
+__tests__/
+
+# Ignore config files
+.gitignore
+.npmignore
