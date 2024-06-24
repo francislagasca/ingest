@@ -16,28 +16,28 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm test
-      - name: Publish with retries
-        run: |
-          max_attempts=5
-          attempt=1
-          delay=60
-          while [ $attempt -le $max_attempts ]; do
-            if npm publish --access public; then
-              echo "Publish succeeded"
-              break
-            else
-              if [ $attempt -eq $max_attempts ]; then
-                echo "Publish failed after $attempt attempts"
-                exit 1
-              else
-                echo "Publish failed, retrying in $delay seconds..."
-                sleep $delay
-                attempt=$(( $attempt + 1 ))
-                delay=$(( $delay * 2 ))
-              fi
-            fi
-          done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Check npm logs
-        run: cat /home/runner/.npm/_logs/$(date +"%Y-%m-%d")* | tail -n 100
+      # - name: Publish with retries
+      #   run: |
+      #     max_attempts=5
+      #     attempt=1
+      #     delay=60
+      #     while [ $attempt -le $max_attempts ]; do
+      #       if npm publish --access public; then
+      #         echo "Publish succeeded"
+      #         break
+      #       else
+      #         if [ $attempt -eq $max_attempts ]; then
+      #           echo "Publish failed after $attempt attempts"
+      #           exit 1
+      #         else
+      #           echo "Publish failed, retrying in $delay seconds..."
+      #           sleep $delay
+      #           attempt=$(( $attempt + 1 ))
+      #           delay=$(( $delay * 2 ))
+      #         fi
+      #       fi
+      #     done
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Check npm logs
+      #   run: cat /home/runner/.npm/_logs/$(date +"%Y-%m-%d")* | tail -n 100
